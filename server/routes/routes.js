@@ -43,10 +43,11 @@ router.get('/images/get',(req,res)=>{
    req.getConnection((err,conn)=>{
        if(err) return res.status(500).send('server error')
 
-       conn.query('SELECT * FROM imagen ORDER BY imagen.id',(err,rows)=>{
+       conn.query('SELECT * FROM imagen',(err,rows)=>{
            if(err) return res.status(500).send('server error')
            //res.send('OK')
            //res.json(rows)
+           //
            console.log(rows)
            rows.map(img=>{
                fs.writeFileSync(path.join(__dirname, '../dbimages/' + img.id + '-ecommerce.png'), img.data)
